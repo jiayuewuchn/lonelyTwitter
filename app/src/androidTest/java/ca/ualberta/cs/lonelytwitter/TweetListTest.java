@@ -2,47 +2,39 @@ package ca.ualberta.cs.lonelytwitter;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-public class TweetListTest extends ActivityInstrumentationTestCase2<LonelyTwitterActivity>{
-    public TweetListTest() {
-        super(LonelyTwitterActivity.class);
+public class TweetListTest extends ActivityInstrumentationTestCase2 {
+
+    public TweetListTest(){
+        super(ca.ualberta.cs.lonelytwitter.LonelyTwitterActivity.class);
     }
-    // test method for adding tweet into TweetList
+
     public void testAddTweet(){
         TweetList tweets = new TweetList();
-        Tweet tweet = new NormalTweet("added tweet");
-        TweetList.add(tweet);
-        assertTrue(TweetList.hasTweet(tweet));
-
-        assertTrue(Boolean.FALSE);
-
+        Tweet tweet = new NormalTweet("adding tweet");
+        tweets.add(tweet);
+        assertTrue(tweets.hasTweet(tweet));
     }
-    // test method for checking whether a tweet is in the TweetList
-    public void testHasTweet(){
-        TweetList tweets = new TweetList();
-        Tweet tweet = new NormalTweet("Hello");
 
-        assertFalse(TweetList.hasTweet(tweet));
-        TweetList.add(tweet);
-        assertTrue(TweetList.hasTweet(tweet));
-
+    public void testDelete(){
+        TweetList list = new TweetList();
+        Tweet tweet = new NormalTweet("test");
+        list.add(tweet);
+        list.delete(tweet);
+        assertFalse(list.hasTweet(tweet));
     }
+
     public void testGetTweet(){
-        TweetList tweetlist = new TweetList();
-        Tweet tweet = new NormalTweet("get tweet check");
-        TweetList.add(tweet);
-        Tweet retrieveTweet = tweetlist.getTweet(0);
-        assertEquals(retrieveTweet.getMessage(), tweet.getMessage());
-        assertEquals(retrieveTweet.getDate(), tweet.getDate());
+        TweetList tweets = new TweetList(); //
+        Tweet tweet = new NormalTweet("test");
+        tweets.add(tweet);
+        Tweet returnedTweet = tweets.getTweet(0);
+        assertEquals(returnedTweet.getMessage(), tweet.getMessage());
     }
 
-    public void testDeleteTweet(){
-        TweetList tweets = new TweetList();
-        Tweet tweet = new NormalTweet("delete tweet");
-
-        TweetList.add(tweet);
-        TweetList.delete(tweet);
-
-        assertFalse(TweetList.hasTweet(tweet));
-
+    public void testHasTweet(){
+        TweetList list = new TweetList();
+        Tweet tweet = new NormalTweet("test");
+        list.add(tweet);
+        assertTrue(list.hasTweet(tweet));
     }
 }
